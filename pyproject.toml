@@ -1,0 +1,4 @@
+[project]
+name = "redis-from-scratch"
+version = "0.0.1"
+dependencies = []
