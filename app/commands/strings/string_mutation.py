@@ -1,0 +1,39 @@
+
+from app.client import resp
+from app.datastore.repository import get_value, set_value
+
+
+async def handle_append(args, session):
+    if len(args) != 2:
+        return resp.arity_error("append")
+    key, append_value = args[0], args[1]
+    value, type_ = get_value(key)
+    if value is not None and type_ != "string":
+        return resp.wrongtype_error()
+    if value is None:
+        set_value(key, append_value, "string")
+        return resp.integer(len(append_value))
+    else:
+        set_value(key, value + append_value, "string")
+        return resp.integer(len(value) + len(append_value))
+
+
+async def handle_append(args, session):
+    # ...existing code or import from old handler...
+    pass
+
+
+async def handle_setrange(args, session):
+    pass
+
+
+async def handle_getset(args, session):
+    pass
+
+
+async def handle_getdel(args, session):
+    pass
+
+
+async def handle_getex(args, session):
+    pass
