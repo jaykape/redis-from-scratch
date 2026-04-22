@@ -17,16 +17,19 @@ def del_value(key: str) -> bool:
 def exists(key: str) -> bool:
     if expire_if_needed(key):
         return False
-    return key in STORE
+    entry = STORE.get(key)
+    return entry is not None
 
 
 def type_of(key: str) -> str:
     if expire_if_needed(key):
         return "none"
-    value = STORE.get(key)
-    if value is None:
+    entry = STORE.get(key)
+    if entry is None:
         return "none"
-    if isinstance(value, str):
+    if isinstance(entry, dict) and "type" in entry:
+        return entry["type"]
+    if isinstance(entry, str):
         return "string"
     return "unknown"
 

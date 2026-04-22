@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from app.client import resp
-from app.commands import datastore, auth, connection, keyspace, server
+from app.commands import strings, auth, connection, keyspace, server
 
 
 @dataclass(frozen=True)
@@ -42,12 +42,13 @@ AUTH_COMMANDS: dict[str, CommandSpec] = {
 }
 
 STRING_COMMANDS: dict[str, CommandSpec] = {
-    "SET": CommandSpec(datastore.handle_set, is_write=True),
-    "GET": CommandSpec(datastore.handle_get),
-    "INCR": CommandSpec(datastore.handle_incr, is_write=True),
-    "DECR": CommandSpec(datastore.handle_decr, is_write=True),
-    "INCRBY": CommandSpec(datastore.handle_incrby, is_write=True),
-    "DECRBY": CommandSpec(datastore.handle_decrby, is_write=True),
+    "APPEND": CommandSpec(strings.handle_append, is_write=True),
+    "SET": CommandSpec(strings.handle_set, is_write=True),
+    "GET": CommandSpec(strings.handle_get),
+    "INCR": CommandSpec(strings.handle_incr, is_write=True),
+    "DECR": CommandSpec(strings.handle_decr, is_write=True),
+    "INCRBY": CommandSpec(strings.handle_incrby, is_write=True),
+    "DECRBY": CommandSpec(strings.handle_decrby, is_write=True),
 }
 
 KEYSPACE_COMMANDS: dict[str, CommandSpec] = {
