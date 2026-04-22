@@ -1,4 +1,20 @@
 import redis
+import time
+import subprocess
+import socket
+import signal
+import os
+from kill_process import kill_process_on_port
+
+
+kill_process_on_port(6379)
+
+
+# Start the server
+server_proc = subprocess.Popen([
+    os.sys.executable, '-m', 'app.main'
+])
+time.sleep(2)  # Give the server time to start
 
 r = redis.Redis(host="localhost", port=6379, decode_responses=True)
 
@@ -46,3 +62,7 @@ check("CONFIG GET appendonly", r.config_get(
     "appendonly"), {"appendonly": "no"})
 
 print(f"\n{passed + failed} tests: {passed} passed, {failed} failed.")
+
+# Stop the server
+server_proc.terminate()
+server_proc.wait()
