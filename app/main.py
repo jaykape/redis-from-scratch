@@ -42,6 +42,10 @@ async def main() -> None:
             await server.serve_forever()
         except asyncio.CancelledError:
             pass
+        finally:
+            print("Shutting down server...")
+            server.close()
+            await server.wait_closed()
 
 
 if __name__ == "__main__":
