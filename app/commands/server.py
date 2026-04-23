@@ -1,8 +1,17 @@
+# Server commands
 from __future__ import annotations
-
 from app import state
 from app.client import resp
 from app.config import CONFIG, set_config_value
+async def handle_acl(args, session): pass
+async def handle_config(args, session): pass
+async def handle_dbszize(args, session): pass
+async def handle_flushall(args, session): pass
+async def handle_flushdb(args, session): pass
+async def handle_info(args, session): pass
+async def handle_lastsave(args, session): pass
+async def handle_save(args, session): pass
+async def handle_shutdown(args, session): pass
 
 
 async def handle_select(args: list[str], session) -> bytes:

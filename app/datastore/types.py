@@ -27,8 +27,8 @@ def type_of(key: str) -> str:
     entry = STORE.get(key)
     if entry is None:
         return "none"
-    if isinstance(entry, dict) and "type" in entry:
-        return entry["type"]
+    if hasattr(entry, "type"):
+        return entry.type
     if isinstance(entry, str):
         return "string"
     return "unknown"

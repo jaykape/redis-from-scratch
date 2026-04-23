@@ -1,6 +1,10 @@
 from __future__ import annotations
 
 
+def wrongtype_error() -> bytes:
+    return error("WRONGTYPE Operation against a key holding the wrong kind of value")
+
+
 def simple_string(value: str) -> bytes:
     return f"+{value}\r\n".encode()
 

@@ -1,0 +1,20 @@
+# Scripting commands
+async def handle_eval(args, session): pass
+async def handle_evalsha(args, session): pass
+async def handle_evalsha_ro(args, session): pass
+async def handle_eval_ro(args, session): pass
+async def handle_fcall(args, session): pass
+async def handle_fcall_ro(args, session): pass
+async def handle_function_delete(args, session): pass
+async def handle_function_dump(args, session): pass
+async def handle_function_flush(args, session): pass
+async def handle_function_kill(args, session): pass
+async def handle_function_list(args, session): pass
+async def handle_function_load(args, session): pass
+async def handle_function_restore(args, session): pass
+async def handle_function_stats(args, session): pass
+async def handle_script_debug(args, session): pass
+async def handle_script_exists(args, session): pass
+async def handle_script_flush(args, session): pass
+async def handle_script_kill(args, session): pass
+async def handle_script_load(args, session): pass
