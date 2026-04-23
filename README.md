@@ -1,6 +1,6 @@
 <p>
 <picture>
-<img src="/public/logo.png">
+<img src="public/logo.png">
 </picture>
 </p>
 
