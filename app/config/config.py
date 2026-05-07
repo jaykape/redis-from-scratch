@@ -16,6 +16,7 @@ class ConfigEntry:
 
 
 DEFAULT_CONFIG: dict[str, ConfigEntry] = {
+    "bind": ConfigEntry(value="127.0.0.1", mutable=False, validator=validate_non_empty),
     "port": ConfigEntry(value="6379", mutable=False),
     "databases": ConfigEntry(value="16", mutable=False),
     "appendonly": ConfigEntry(value="no", mutable=True, validator=validate_yes_no),
@@ -24,6 +25,24 @@ DEFAULT_CONFIG: dict[str, ConfigEntry] = {
 }
 
 CONFIG: dict[str, ConfigEntry] = DEFAULT_CONFIG.copy()
+
+
+def load_config_file(path: str) -> None:
+    """Load a minimal Redis-style config file of `key value` pairs."""
+    with open(path, "r", encoding="utf-8") as handle:
+        for line_number, raw_line in enumerate(handle, start=1):
+            line = raw_line.strip()
+            if not line or line.startswith("#"):
+                continue
+
+            parts = line.split(None, 1)
+            if len(parts) != 2:
+                raise ValueError(
+                    f"Invalid config line {line_number}: expected '<key> <value>'"
+                )
+
+            key, value = parts[0].lower(), parts[1].strip()
+            set_startup_config(key, value)
 
 
 def set_startup_config(key: str, value: str) -> None:

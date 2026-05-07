@@ -10,6 +10,19 @@ if TYPE_CHECKING:
     from app.client.session import ClientSession
 
 
+async def handle_auth(args: list[str], session: "ClientSession") -> bytes:
+    if len(args) not in {1, 2}:
+        return resp.arity_error("auth")
+
+    username = "default" if len(args) == 1 else args[0]
+    password = args[-1]
+    try:
+        authenticate_session(session, username, password)
+    except ValueError as exc:
+        return resp.error(str(exc))
+    return resp.simple_string("OK")
+
+
 async def handle_ping(args: list[str], session: "ClientSession") -> bytes:
     if len(args) > 1:
         return resp.arity_error("ping")
