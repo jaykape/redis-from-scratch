@@ -31,11 +31,6 @@ async def handle_set(args, session):
     return resp.simple_string("OK")
 
 
-async def handle_set(args, session):
-    # ...existing code or import from old handler...
-    pass
-
-
 async def handle_setex(args, session):
     pass
 

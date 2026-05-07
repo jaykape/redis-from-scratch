@@ -18,11 +18,6 @@ async def handle_append(args, session):
         return resp.integer(len(value) + len(append_value))
 
 
-async def handle_append(args, session):
-    # ...existing code or import from old handler...
-    pass
-
-
 async def handle_setrange(args, session):
     pass
 

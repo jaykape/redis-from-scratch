@@ -3,8 +3,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from app.client import resp
-from app.commands.strings import string_read, string_write, string_numeric, string_mutation, string_advanced
-from app.commands import auth, connection, keyspace, server
+from app.commands.strings import string_etc, string_get, string_numeric, string_set
+from app.commands import auth, connection, server
+from app.commands.generic import generic as keyspace
 
 
 @dataclass(frozen=True)
@@ -43,13 +44,14 @@ AUTH_COMMANDS: dict[str, CommandSpec] = {
 }
 
 STRING_COMMANDS: dict[str, CommandSpec] = {
-    "APPEND": CommandSpec(string_mutation.handle_append, is_write=True),
-    "SET": CommandSpec(string_write.handle_set, is_write=True),
-    "GET": CommandSpec(string_read.handle_get),
+    "APPEND": CommandSpec(string_etc.handle_append, is_write=True),
+    "SET": CommandSpec(string_set.handle_set, is_write=True),
+    "GET": CommandSpec(string_get.handle_get),
     "INCR": CommandSpec(string_numeric.handle_incr, is_write=True),
     "DECR": CommandSpec(string_numeric.handle_decr, is_write=True),
     "INCRBY": CommandSpec(string_numeric.handle_incrby, is_write=True),
     "DECRBY": CommandSpec(string_numeric.handle_decrby, is_write=True),
+    "INCRBYFLOAT": CommandSpec(string_numeric.handle_incrbyfloat, is_write=True),
 }
 
 KEYSPACE_COMMANDS: dict[str, CommandSpec] = {
